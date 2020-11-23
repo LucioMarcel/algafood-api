@@ -21,7 +21,7 @@ import com.algaworks.algafood.api.assembler.CozinhaModelAssembler;
 import com.algaworks.algafood.api.model.CozinhaModel;
 import com.algaworks.algafood.api.model.input.CozinhaInput;
 import com.algaworks.algafood.domain.exception.CozinhaNaoEncontradaException;
-import com.algaworks.algafood.domain.exception.NegocioExceprion;
+import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.repository.CozinhaRepository;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
@@ -60,7 +60,7 @@ public class CozinhaController {
 			Cozinha cozinha = cozinhaInputDisassembler.toDomainObject(cozinhaInput);
 			return cozinhaModelAssembler.toModel(cadastroCozinha.salvar(cozinha));
 		} catch (CozinhaNaoEncontradaException e) {
-			throw new NegocioExceprion(e.getMessage(), e);
+			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class CozinhaController {
 			cozinhaInputDisassembler.copyToDomainObject(cozinhaInput, cozinhaAtual);
 			return cozinhaModelAssembler.toModel(cadastroCozinha.salvar(cozinhaAtual));
 		} catch (CozinhaNaoEncontradaException e) {
-			throw new NegocioExceprion(e.getMessage(),e );
+			throw new NegocioException(e.getMessage(),e );
 		}
 	}
 	

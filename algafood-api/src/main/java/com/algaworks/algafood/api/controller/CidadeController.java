@@ -21,7 +21,7 @@ import com.algaworks.algafood.api.assembler.CidadeModelAssembler;
 import com.algaworks.algafood.api.model.CidadeModel;
 import com.algaworks.algafood.api.model.input.CidadeInput;
 import com.algaworks.algafood.domain.exception.EstadoNaoEncontradoException;
-import com.algaworks.algafood.domain.exception.NegocioExceprion;
+import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Cidade;
 import com.algaworks.algafood.domain.repository.CidadeRepository;
 import com.algaworks.algafood.domain.service.CadastroCidadeService;
@@ -60,7 +60,7 @@ public class CidadeController {
 			Cidade cidade = cidadeInputDisassembler.toDomainObject(cidadeInput);
 			return cidadeModelAssembler.toModel(cadastroCidade.salvar(cidade));
 		} catch ( EstadoNaoEncontradoException e) {
-			throw new NegocioExceprion(e.getMessage(), e);
+			throw new NegocioException(e.getMessage(), e);
 		}
 		
 	}
@@ -72,7 +72,7 @@ public class CidadeController {
 			cidadeInputDisassembler.copyToDomainObject(cidadeInput, cidadeAtual);
 			return cidadeModelAssembler.toModel(cadastroCidade.salvar(cidadeAtual));	
 		} catch (EstadoNaoEncontradoException e) {
-			throw new NegocioExceprion(e.getMessage(),e);
+			throw new NegocioException(e.getMessage(),e);
 		}
 	}
 

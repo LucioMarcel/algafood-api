@@ -21,7 +21,7 @@ import com.algaworks.algafood.api.assembler.EstadoModelAssembler;
 import com.algaworks.algafood.api.model.EstadoModel;
 import com.algaworks.algafood.api.model.input.EstadoInput;
 import com.algaworks.algafood.domain.exception.EstadoNaoEncontradoException;
-import com.algaworks.algafood.domain.exception.NegocioExceprion;
+import com.algaworks.algafood.domain.exception.NegocioException;
 import com.algaworks.algafood.domain.model.Estado;
 import com.algaworks.algafood.domain.repository.EstadoRepository;
 import com.algaworks.algafood.domain.service.CadastroEstadoService;
@@ -60,7 +60,7 @@ public class EstadoController {
 			Estado estado = estadoInputDisassembler.toDomainObject(estadoInput);
 			return estadoModelAssembler.toModel(cadastroEstado.salvar(estado));
 		} catch (EstadoNaoEncontradoException e) {
-			throw new NegocioExceprion(e.getMessage(), e);
+			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class EstadoController {
 			estadoInputDisassembler.copyToDomainObect(estadoInput, estadoAtual);
 			return estadoModelAssembler.toModel(cadastroEstado.salvar(estadoAtual)); 
 		} catch (EstadoNaoEncontradoException e) {
-			throw new NegocioExceprion(e.getMessage(), e);
+			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 	
