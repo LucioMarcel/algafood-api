@@ -28,6 +28,12 @@ public class CadastroCozinhaService {
 	public void excluir(Long cozinhaId) {
 		try {
 			cozinhaRepository.deleteById(cozinhaId);
+			/*
+			 * Força a eecução do delete nest exato momento. Isto se torna necessário devido a  anotação
+			 * @Transactional. Com esta anotação o JPA não executa o delete nesse exatmomento a não ser que seja
+			 * forçado. Se isso acontecer, não conseguimos capturar a exceção. 		
+			*/	
+			cozinhaRepository.flush(); // froça a execução do delete neste mo
 			
 		} catch (EmptyResultDataAccessException e) {
 			throw new CozinhaNaoEncontradaException(cozinhaId);
