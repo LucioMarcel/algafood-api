@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,13 +22,10 @@ public class ItemPedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
 	private BigDecimal precoUnitario;
 	
-	@NotNull
-	private BigDecimal quantidade;
+	private Integer quantidade;
 	
-	@NotNull
 	private BigDecimal precoTotal;
 	
 	private String observacao;
@@ -41,5 +37,21 @@ public class ItemPedido {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Produto produto;
+	
+	public void calcularPrecoTotal() {
+	    BigDecimal precoUnitario = this.getPrecoUnitario();
+	    Integer quantidade = this.getQuantidade();
+
+	    if (precoUnitario == null) {
+	        precoUnitario = BigDecimal.ZERO;
+	    }
+
+	    if (quantidade == null) {
+	        quantidade = 0;
+	    }
+
+	    this.setPrecoTotal(precoUnitario.multiply(new BigDecimal(quantidade)));
+	}
+	
 	
 }

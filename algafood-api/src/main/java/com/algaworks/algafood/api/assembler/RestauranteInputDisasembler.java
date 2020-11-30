@@ -21,7 +21,7 @@ public class RestauranteInputDisasembler {
 	
 	public void copyToDomainObject(RestauranteInput restauranteInput, Restaurante restaurante) {
 		/*
-		 * Aqui instaciamos uma nova coxnia antes do mapeamento porque senão o JPA lançará 
+		 * Aqui instaciamos uma nova cozinha antes do mapeamento porque senão o JPA lançará 
 		 * uma exceção caso queiramos alterar a referência da cozinha do resturante mudando o ID
 		 * da cozinha no restauranteInput. Esta mudança de ID não se trata de mudar o ID da cozinha,
 		 * mas sim da referência da cozinha no restaurante. Como a instânica de restaurante/cozinha dem estar
